@@ -1,0 +1,17 @@
+{
+  "name": "localdev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "localdev": "./bin/localdev.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TerraZero",
+  "license": "ISC",
+  "dependencies": {
+    "find-package-json": "^1.2.0"
+  }
+}
