@@ -12,7 +12,7 @@ function installDependencies(path, ...packages) {
   }
 }
 
-function uninstallDependencies(path, ...packages) {
+function uninstallDependencies(...packages) {
   for (const pack of packages) {
     if (FS.existsSync(Path.join('./node_modules/' + pack))) {
       console.log('Uninstall local package: ' + pack);
@@ -24,8 +24,10 @@ function uninstallDependencies(path, ...packages) {
 switch (process.argv[2]) {
   case 'install':
     console.log('Link local module');
-    FS.symlinkSync(Path.dirname(FindJson(process.cwd()).next().filename), './node_modules/' + pack.name, 'dir');
-    installDependencies(...process.argv.slice().splice(3));
+    const packdir = Path.dirname(FindJson(process.cwd()).next().filename);
+
+    FS.symlinkSync(packdir, './node_modules/' + pack.name, 'dir');
+    installDependencies(Path.join(packdir, '..'), ...process.argv.slice().splice(3));
     break;
   case 'uninstall':
     if (FS.existsSync(Path.join('node_modules/', pack.name))) {
